@@ -14,6 +14,7 @@ import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import by.tc.web.dao.BookDAO;
+import by.tc.web.dao.DAOException;
 import by.tc.web.entity.Book;
 import by.tc.web.entity.Genre;
 import by.tc.web.entity.SourceName;
@@ -22,7 +23,7 @@ import by.tc.web.entity.Tag;
 public class StAXDAO implements BookDAO {
 
 	@Override
-	public ArrayList<Book> parse() {
+	public ArrayList<Book> parse() throws DAOException {
 		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
 		XMLEventReader xmlEventReader = null;
 		ArrayList<Book> books = null;
@@ -30,7 +31,7 @@ public class StAXDAO implements BookDAO {
 			xmlEventReader = xmlInputFactory.createXMLEventReader(new FileInputStream(SourceName.get()));
 			books = getBooks(xmlEventReader);
 		} catch (FileNotFoundException | XMLStreamException e) {
-			e.printStackTrace();
+			throw new DAOException(e.getMessage(), e.getCause());
 		}
 		return books;
 	}
