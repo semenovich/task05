@@ -6,7 +6,7 @@ public final class ServiceFactory {
 	
 	private static ServiceFactory instance = new ServiceFactory();
 	
-	private final BookService bookService = new BookServiceImpl();
+	private BookService bookService = new BookServiceImpl();
 	
 	private ServiceFactory() {}
 	

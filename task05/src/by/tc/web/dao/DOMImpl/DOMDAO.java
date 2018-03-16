@@ -22,6 +22,8 @@ import by.tc.web.entity.Tag;
 
 public class DOMDAO implements BookDAO {
 
+    private static final String BOOK = "book";
+
 	@Override
 	public ArrayList<Book> parse() throws DAOException {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -34,7 +36,7 @@ public class DOMDAO implements BookDAO {
 			throw new DAOException(e.getMessage(), e.getCause());
 		}
 		
-		NodeList bookNodeList = document.getElementsByTagName("book");
+		NodeList bookNodeList = document.getElementsByTagName(BOOK);
 		return getBooks(bookNodeList);
 	}
 	

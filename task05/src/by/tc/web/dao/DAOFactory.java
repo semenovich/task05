@@ -9,14 +9,18 @@ import by.tc.web.dao.StAXImpl.StAXDAO;
 
 public final class DAOFactory {
 
+    private static final String SAX = "SAX";
+    private static final String StAX = "StAX";
+    private static final String DOM = "DOM";
+
 	private static DAOFactory instance = new DAOFactory();
 	
 	private Map<String, BookDAO> dao = new HashMap<>();  
 	
 	private DAOFactory() {
-		dao.put("SAX", new SAXDAO());
-		dao.put("StAX", new StAXDAO());
-		dao.put("DOM", new DOMDAO());
+		dao.put(SAX, new SAXDAO());
+		dao.put(StAX, new StAXDAO());
+		dao.put(DOM, new DOMDAO());
 	}
 	
 	public static DAOFactory getInstance() {

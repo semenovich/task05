@@ -16,6 +16,11 @@ import by.tc.web.service.ServiceFactory;
 public class FrontContoller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+    private static final String PARSER_TYPE = "parserType";
+    private static final String PAGE = "page";
+    private static final String INFO = "info";
+    private static final String RESULT_PAGE = "WEB-INF/jsp/result.jsp";
+
     public FrontContoller() {
         super();
     }
@@ -24,8 +29,8 @@ public class FrontContoller extends HttpServlet {
 		ServiceFactory factory = ServiceFactory.getInstance();
 		BookService bookService = factory.getBookService();
 			
-		String parserType = request.getParameter("parserType");		
-		int page = Integer.valueOf(request.getParameter("page"));
+		String parserType = request.getParameter(PARSER_TYPE);		
+		int page = Integer.valueOf(request.getParameter(PAGE));
 		
 		Info info;
 		try {
@@ -34,10 +39,10 @@ public class FrontContoller extends HttpServlet {
 			throw new ServletException(e.getMessage(), e.getCause());
 		}
 		
-		request.setAttribute("info", info);
-		request.setAttribute("page", page);
+		request.setAttribute(INFO, info);
+		request.setAttribute(PAGE, page);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/jsp/result.jsp"); 
+		RequestDispatcher dispatcher = request.getRequestDispatcher(RESULT_PAGE); 
 		dispatcher.forward(request, response);
 	}
 

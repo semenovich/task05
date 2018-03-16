@@ -22,6 +22,8 @@ import by.tc.web.entity.Tag;
 
 public class StAXDAO implements BookDAO {
 
+    private static final String BOOK_ID = "id";
+
 	@Override
 	public ArrayList<Book> parse() throws DAOException {
 		XMLInputFactory xmlInputFactory = XMLInputFactory.newInstance();
@@ -46,7 +48,7 @@ public class StAXDAO implements BookDAO {
 				switch (Tag.valueOf(startElement.getName().getLocalPart())) {
 					case book:
 						currentBook = new Book();
-						Attribute idAttr = startElement.getAttributeByName(new QName("id"));
+						Attribute idAttr = startElement.getAttributeByName(new QName(BOOK_ID));
 						currentBook.setId(idAttr.getValue());
 						break;
 					case title:

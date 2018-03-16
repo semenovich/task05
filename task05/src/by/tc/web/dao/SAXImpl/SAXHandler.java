@@ -12,6 +12,9 @@ import by.tc.web.entity.Tag;
 
 public final class SAXHandler extends DefaultHandler{
 
+    private static final String BOOK_ID = "id";
+    private static final String OPEN_TAG = "<";
+
 	private ArrayList<Book> books;
 	private Book currentBook;
 	private String currentElement;
@@ -40,7 +43,7 @@ public final class SAXHandler extends DefaultHandler{
 			break;
 		case book:
 			currentBook = new Book();
-			currentBook.setId(attributes.getValue("id"));
+			currentBook.setId(attributes.getValue(BOOK_ID));
 			break;
 		default:
 			break;
@@ -63,7 +66,7 @@ public final class SAXHandler extends DefaultHandler{
 	@Override
 	public void characters(char[] ch, int start, int length) throws SAXException {
 		String text = new String(ch, start, length);
-		if (text.contains("<") || currentElement == null) {
+		if (text.contains(OPEN_TAG) || currentElement == null) {
 			return;
 		}
 		switch (Tag.valueOf(currentElement)) {
